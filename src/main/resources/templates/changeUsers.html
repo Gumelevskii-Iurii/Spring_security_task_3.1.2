@@ -10,7 +10,7 @@
 
 <h1>Change user</h1>
 
-<form action="#" th:method="PATCH" th:action="@{/changeUsers}" th:object="${user}">
+<form action="#" th:method="PUT" th:action="@{/changeUsers}" th:object="${user}">
 
     <label for="userId">UserId</label>
     <input readonly type="number" th:field="*{id}" id="userId" placeholder="UserId">
@@ -38,7 +38,7 @@
     <br/>
 
     <label for="age">Enter password</label>
-    <input type="password" min="0" max="127" th:field="*{password}" id="password">
+    <input type="text" min="0" max="127" th:field="*{password}" id="password">
 
     <br/>
 
@@ -54,6 +54,12 @@
                th:value="ROLE_ADMIN"
                th:text="Admin">
     </label>
+
+<!--    <th:block th:each="role:${roles}">-->
+<!--        <lable th:text="${role.getName()}"></lable>-->
+<!--        <input type="checkbox" th:field="${user.roles}" th:value="${role.getId()}"/>-->
+<!--    </th:block>-->
+
 
     <br/>
 

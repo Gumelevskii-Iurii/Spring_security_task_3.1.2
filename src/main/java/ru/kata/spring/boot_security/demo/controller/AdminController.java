@@ -13,6 +13,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 
 @Controller
@@ -31,7 +32,7 @@ public class AdminController {
     public String users(Model model) {
         Collection<Role> roles = roleService.listRoles();
         model.addAttribute("roles", roles);
-        model.addAttribute("user", new User());
+//        model.addAttribute("user", new User());
         model.addAttribute("users", userService.listUsers());
         return "admin";
     }
@@ -82,12 +83,15 @@ public class AdminController {
         } else if (roleAdmin != null && roleAdmin.equals("ROLE_ADMIN")) {
             roles.add(roleService.getRoleByName("ROLE_ADMIN"));
         }
-        else roles.add(roleService.getRoleByName("ROLE_USER"));
+//        else roles.add(roleService.getRoleByName("ROLE_USER"));
 
         user.setRoles(roles);
         userService.changeUser(user);
         return "redirect:/admin";
     }
+
+
+
 
 }
 
