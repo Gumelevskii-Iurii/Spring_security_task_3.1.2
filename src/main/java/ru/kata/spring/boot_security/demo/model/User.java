@@ -48,6 +48,7 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+
     public Long getId() {
         return id;
     }
@@ -55,6 +56,7 @@ public class User implements UserDetails {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public Collection<Role> getRoles() {
         return roles;
@@ -108,6 +110,7 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

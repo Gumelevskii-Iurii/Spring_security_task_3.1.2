@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.kata.spring.boot_security.demo.model.User;
+
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
@@ -15,7 +16,5 @@ public interface UserService extends UserDetailsService {
     public User changeUser(User user);
 
     public User getUserById(long id);
-//
-//    User getUserByEmail(String email);
 
 }

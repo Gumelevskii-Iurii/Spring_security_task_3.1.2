@@ -16,7 +16,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "name")
     private String name;
 
-//    @JsonIgnore
+    //    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     Collection<User> users;
 

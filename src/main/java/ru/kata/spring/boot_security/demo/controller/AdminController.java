@@ -10,11 +10,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-
 
 @Controller
 public class AdminController {
@@ -32,7 +28,6 @@ public class AdminController {
     public String users(Model model) {
         Collection<Role> roles = roleService.listRoles();
         model.addAttribute("roles", roles);
-//        model.addAttribute("user", new User());
         model.addAttribute("users", userService.listUsers());
         return "admin";
     }
@@ -46,13 +41,9 @@ public class AdminController {
 
     @PostMapping("/addUsers")
     public String saveNewUser(@ModelAttribute("user") User user,
-                              @RequestParam(required=false) String roleAdmin) {
-        Collection<Role> roles = new HashSet<>();
-        roles.add(roleService.getRoleByName("ROLE_USER"));
-        if (roleAdmin != null && roleAdmin.equals("ROLE_ADMIN")) {
-            roles.add(roleService.getRoleByName("ROLE_ADMIN"));
-        }
-        user.setRoles(roles);
+                              @RequestParam(required = false) String roleAdmin,
+                              @RequestParam(required = false) String roleUser) {
+        roleService.addUserRole(user, roleAdmin, roleUser);
         userService.addUser(user);
         return "redirect:/admin";
     }
@@ -70,31 +61,13 @@ public class AdminController {
         return "changeUsers";
     }
 
-    @PostMapping(value = "/changeUsers")
+    @PutMapping(value = "/changeUsers")
     public String postEditUser(@ModelAttribute("user") User user,
-                               @RequestParam(required=false) String roleAdmin,
-                               @RequestParam(required=false) String roleUser) {
-
-        Collection<Role> roles = new ArrayList<>();
-
-        if (roleUser != null && roleUser.equals("ROLE_USER") && (roleAdmin != null && roleAdmin.equals("ROLE_ADMIN"))) {
-            roles.add(roleService.getRoleByName("ROLE_USER"));
-            roles.add(roleService.getRoleByName("ROLE_ADMIN"));
-        } else if (roleAdmin != null && roleAdmin.equals("ROLE_ADMIN")) {
-            roles.add(roleService.getRoleByName("ROLE_ADMIN"));
-        }
-//        else roles.add(roleService.getRoleByName("ROLE_USER"));
-
-        user.setRoles(roles);
+                               @RequestParam(required = false) String roleAdmin,
+                               @RequestParam(required = false) String roleUser) {
+        roleService.addUserRole(user, roleAdmin, roleUser);
         userService.changeUser(user);
         return "redirect:/admin";
     }
 
-
-
-
 }
-
-
-
-

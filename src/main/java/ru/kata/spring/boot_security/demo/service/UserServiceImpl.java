@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao){
+    public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -48,10 +48,5 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userDao.getUserByEmail(email);
     }
-
-//    @Override
-//    public User getUserByEmail(String email) {
-//        return userDao.getUserByEmail(email);
-//    }
 
 }
